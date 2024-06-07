@@ -81,3 +81,5 @@ end
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sidekiq"
 gem "sidekiq-failures", "~> 1.0"
+gem "devise"
+gem "devise-i18n"
