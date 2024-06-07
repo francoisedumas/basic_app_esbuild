@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     unauthenticated { root to: "devise/sessions#new", as: :unauthenticated_root }
 
     resource :profile, only: [:edit, :update], controller: :profile
+    resource :document, only: [:show]
 
     authenticate :user, -> (user) { user.admin? } do
       require "sidekiq/web"
