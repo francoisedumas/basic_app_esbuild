@@ -79,3 +79,5 @@ group :development, :test do
   gem "rubocop-rails", require: false
 end
 gem "simple_form", github: "heartcombo/simple_form"
+gem "sidekiq"
+gem "sidekiq-failures", "~> 1.0"
