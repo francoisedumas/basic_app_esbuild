@@ -1,0 +1,9 @@
+<% content_for(:title) { t(".title") } %>
+
+<% content_for :actions do %>
+  <div class="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
+    <%= link_to t(".new"), "#", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<%= render TableComponent.new(model: User, columns: [:full_name, :email, :role_text, :edit_link], collection: @users) %>

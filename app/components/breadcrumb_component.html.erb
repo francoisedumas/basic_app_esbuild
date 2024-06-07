@@ -1,0 +1,26 @@
+<div>
+  <nav class="sm:hidden" aria-label="Back">
+    <%= link_to back_path, class: "flex items-center text-sm font-medium text-gray-500 hover:text-gray-700" do %>
+      <i class="fa-solid fa-chevron-left lex-shrink-0 -ml-1 mr-1 text-gray-400"></i>
+      <span><%= t("back") %></span>
+    <% end %>
+  </nav>
+  <nav class="hidden sm:flex" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-4" role="list">
+      <% items.each do |item_title, path| %>
+        <li class="group">
+          <div class="flex items-center text-sm group-first:items-start">
+            <i class="fa-solid fa-angle-right flex-shrink-0 -ml-1 mr-1 text-gray-400 group-first:hidden"></i>
+            <%= link_to t(item_title.to_s), path, class: "group-first:ml-0 ml-4 font-medium text-gray-500 hover:text-gray-700" %>
+          </div>
+        </li>
+      <% end %>
+      <li>
+        <div class="flex items-center text-sm">
+          <i class="fa-solid fa-angle-right flex-shrink-0 -ml-1 mr-1 text-gray-400"></i>
+          <span class="ml-4 font-medium text-gray-500 hover:text-gray-700"><%= title %></span>
+        </div>
+      </li>
+    </ol>
+  </nav>
+</div>

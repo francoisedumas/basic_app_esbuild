@@ -1,7 +1,21 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_scope :user do
+    unauthenticated { root to: "devise/sessions#new", as: :unauthenticated_root }
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+    resource :profile, only: [:edit, :update], controller: :profile
+
+    authenticate :user, -> (user) { user.admin? } do
+      require "sidekiq/web"
+
+      namespace :admin do
+        resources :users
+      end
+      root to: "admin/users#index", as: "admin_authenticated_root"
+    end
+  end
+
+  root "profile#edit"
 end

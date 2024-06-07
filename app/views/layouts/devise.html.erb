@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html class="h-full bg-white">
+  <%= render "layouts/head" %>
+  <body class="h-full">
+    <div class="min-h-full flex">
+      <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 mx-auto w-full max-w-sm lg:w-96 relative">
+        <div>
+          <%= image_tag "logo.svg", alt: "logo", class: "h-12 w-auto mb-8 lg:mb-16" %>
+          <%= yield %>
+        </div>
+
+        <div class="absolute w-full">
+          <% flash.each do |msg_type, message| %>
+            <div class="rounded-md p-4 mt-4 <%= "bg-red-50" if msg_type == "alert" %>">
+              <div class="<%= "fa-circle-xmark text-red-700" if msg_type == "alert" %>">
+                <i class="fa-solid fa-lg"></i>
+              </div>
+              <p class="<%= "text-red-800" if msg_type == "alert" %> text-sm font-medium ml-3">
+                <%= message %>
+              </p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="hidden lg:block relative w-0 flex-1">
+        <%= image_tag "login_image.png", alt: "", class: "absolute inset-0 h-full w-full object-cover" %>
+      </div>
+    </div>
+  </body>
+</html>
