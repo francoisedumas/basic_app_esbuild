@@ -34,6 +34,7 @@ gem "bootsnap", require: false
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
 gem "sass-rails"
+gem "grover"
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]

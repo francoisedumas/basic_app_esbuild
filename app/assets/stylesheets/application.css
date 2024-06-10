@@ -13,9 +13,15 @@
  *= require_tree .
  *= require_self
  */
- body {
+body {
   font-family: 'lato', sans-serif;
 }
+
+* {
+  -webkit-print-color-adjust:exact !important;
+  print-color-adjust:exact !important;
+}
+
 .container {
   max-width: 1000px;
   margin-left: auto;
