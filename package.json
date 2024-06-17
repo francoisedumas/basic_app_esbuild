@@ -4,11 +4,13 @@
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^8.0.4",
+    "chokidar": "^3.6.0",
     "el-transition": "^0.0.7",
     "esbuild": "^0.21.4",
+    "esbuild-rails": "^1.0.7",
     "puppeteer": "^22.10.0"
   },
   "scripts": {
-    "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets"
+    "build": "node esbuild.config.mjs"
   }
 }
