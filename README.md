@@ -1,4 +1,6 @@
-# APP_NAME
+# RAILS DEMONSTRATION APP WITH ESBUILD
+
+This app is linked with my [YouTube Channel](https://www.youtube.com/@FrancoisDevTech/videos)
 
 ## Setup
 
@@ -13,23 +15,20 @@
 ### Prepare
 
 ```
-gh repo clone CHANGE_THIS_TO_GITHUB_REPOSITROY
-cd APP_NAME
+gh repo clone git@github.com:francoisedumas/basic_app_esbuild.git
+cd basic_app_esbuild
 bundle
+yarn
+rails db:setup
 ```
 
 ### Credentials
 
-Ask for dev master key.
+Update your credentials with the adpater you want (grover or wicked_pdf)
 
 ```
-echo CHANGE_THIS_WITH_GIVEN_MASTER_KEY > config/master.key
-```
-
-### Setup
-
-```
-setup
+EDITOR="code --wait" rails credentials:edit
+pdf_adapter: wicked_pdf
 ```
 
 ### Serve
@@ -37,7 +36,3 @@ setup
 ```
 dev
 ```
-
-### Backgroundjobs in production
-
-Sidekiq is available at path `/maintenance/sidekiq`
