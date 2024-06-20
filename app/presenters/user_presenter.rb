@@ -7,6 +7,6 @@ class UserPresenter < ApplicationPresenter
 
   def edit_link
     link_to I18n.t("edit"), "#",
-      class: "text-primary-600 font-semibold hover:text-primary-800"
+            class: "text-primary-600 font-semibold hover:text-primary-800"
   end
 end

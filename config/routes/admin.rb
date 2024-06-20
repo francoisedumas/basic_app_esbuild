@@ -2,7 +2,7 @@
 
 require "sidekiq/web"
 
-root to: "admin/base#index" , as: "admin_authenticated_root"
+root to: "admin/base#index", as: "admin_authenticated_root"
 
 namespace :admin do
   get "/", controller: :base, action: :index

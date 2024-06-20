@@ -47,9 +47,6 @@ gem "enumerize"
 group :development, :test do
   gem "pry-byebug"
   gem "pry-rails"
-end
-
-group :development, :test do
   gem "rubocop-rails", require: false
 end
 

@@ -13,7 +13,7 @@ module PdfGenerator
     end
 
     def tailwind_css
-      file_paths = Dir.glob(Rails.root.join("public", "assets", "application-*.css"))
+      file_paths = Rails.root.glob("public/assets/application-*.css")
       latest = file_paths.max_by { |p| File.mtime(p) }
       File.read latest
     end
