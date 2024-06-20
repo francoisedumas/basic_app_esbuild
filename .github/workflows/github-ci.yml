@@ -1,6 +1,6 @@
 name: Ruby on Rails CI
 
-on: [pull_request]
+on: [push]
 
 jobs:
   rubocop:
