@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     resource :profile, only: [:edit, :update], controller: :profile
     resource :document, only: [:show]
     resource :report, only: [:show]
+    resources :users, only: [] do
+      resources :customer_accounts, only: %i[new create index], module: :users
+    end
 
     authenticate :user, -> (user) { user.admin? } do
       require "sidekiq/web"

@@ -5,7 +5,7 @@
     path: admin_users_path) %>
 
   <%= render MenuLinkComponent.new(title: "Projects", icon: "fa-folder-open", path: "#") %>
-  <%= render MenuLinkComponent.new(title: "Calendar", icon: "fa-calendar", path: "#") %>
+  <%= render MenuLinkComponent.new(title: "Customer account", icon: "fa-calendar", path: user_customer_accounts_path(current_user)) %>
   <%= render MenuLinkComponent.new(title: "Document", icon: "fa-inbox", path: document_path) %>
   <%= render MenuLinkComponent.new(title: "Reports", icon: "fa-chart-column", path: report_path) %>
 </nav>
