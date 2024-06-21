@@ -35,33 +35,40 @@ h1 {
   font-size:2em;
   margin-bottom:0;
 }
+.zigzag {
+  font-family: sans-serif;
+}
 
-table {
-  font-family:sans-serif;
-  th, td {
-    padding:.25em .5em;
-    text-align:left;
-    &:nth-child(2) {
-      text-align:right;
-    }
-  }
-  td {
-    background-color:#eee;
-  }
-  th {
-    background-color:#009;
-    color:#fff;
-  }
+.zigzag th,
+.zigzag td {
+  padding: .25em .5em;
+  text-align: left;
+}
+
+.zigzag th:nth-child(2),
+.zigzag td:nth-child(2) {
+  text-align: right;
+}
+
+.zigzag td {
+  background-color: #eee;
+}
+
+.zigzag th {
+  background-color: #009;
+  color: #fff;
 }
 
 .zigzag {
-  border-collapse:separate;
-  border-spacing:.25em 1em;
-  tbody tr:nth-child(odd) {
-    transform:rotate(2deg);
-  }
-  thead tr,
-  tbody tr:nth-child(even) {
-    transform:rotate(-2deg);
-  }
+  border-collapse: separate;
+  border-spacing: .25em 1em;
+}
+
+.zigzag tbody tr:nth-child(odd) {
+  transform: rotate(2deg);
+}
+
+.zigzag thead tr,
+.zigzag tbody tr:nth-child(even) {
+  transform: rotate(-2deg);
 }
