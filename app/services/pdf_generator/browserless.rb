@@ -5,6 +5,7 @@ module PdfGenerator
     def generate_now
       ::Browserless::Client.new(
         html: html_content,
+        style_tag: css_asset,
         options: {
           display_header_footer: true,
           headerTemplate: %(<div></div>),
@@ -24,6 +25,14 @@ module PdfGenerator
     end
 
     private
+
+    def css_asset
+      if Rails.env.development?
+        File.read(Rails.root.join('app/assets/builds/tailwind.css'))
+      else
+        ActionController::Base.helpers.asset_path('tailwind.css')
+      end
+    end
 
     def layout
       "browserless"
