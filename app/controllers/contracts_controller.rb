@@ -12,6 +12,20 @@ class ContractsController < ApplicationController
     end
   end
 
+  def create
+    DropboxSign::SignatureRequest.new(
+      file_urls: [current_user.contract.document.blob.url],
+      signers: [{name: "Francois DevTech", email: "francois.devtech@gmail.com"}],
+      metadata: { kind: "contract" },
+      options: {
+        title: "mon titre",
+        subject: "mon sujet",
+        message: "mon message"
+      }
+    ).call
+    redirect_to contract_path
+  end
+
   private
 
   def generate_pdf

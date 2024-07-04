@@ -1,3 +1,6 @@
-<%= link_to "Télécharger le contrat", contract_path(format: :pdf), class: "btn" %>
+<div class="flex">
+  <%= button_to "Signer le contrat", contract_path, class: "btn" %>
+  <%= link_to "Télécharger le contrat", contract_path(format: :pdf), class: "btn" %>
+</div>
 
 <%= render "contract" %>

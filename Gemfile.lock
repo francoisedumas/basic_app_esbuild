@@ -116,9 +116,13 @@ GEM
       devise (>= 4.8.0)
     diff-lcs (1.5.1)
     drb (2.2.1)
+    dropbox-sign (1.4.1)
+      typhoeus (~> 1.0, >= 1.0.1)
     enumerize (2.8.1)
       activesupport (>= 3.2)
     erubi (1.12.0)
+    ethon (0.16.0)
+      ffi (>= 1.15.0)
     faraday (2.9.2)
       faraday-net_http (>= 2.0, < 3.2)
     faraday-follow_redirects (0.3.0)
@@ -327,6 +331,8 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
+    typhoeus (1.4.1)
+      ethon (>= 0.9.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
@@ -362,6 +368,7 @@ DEPENDENCIES
   cloudinary
   devise
   devise-i18n
+  dropbox-sign (~> 1.4.1)
   enumerize
   grover
   httparty

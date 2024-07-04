@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resource :profile, only: [:edit], controller: :profile
     resource :document, only: [:show]
     resource :report, only: [:show]
-    resource :contract, only: [:show]
+    resource :contract, only: [:show, :create]
     resources :users, only: [] do
       resources :customer_accounts, only: %i[new create index], module: :users
     end

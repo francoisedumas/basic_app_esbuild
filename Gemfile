@@ -8,6 +8,7 @@ ruby "3.1.2"
 gem "bootsnap", require: false
 gem "browserless"
 gem "cloudinary"
+gem "dropbox-sign", "~> 1.4.1"
 gem "httparty"
 gem "devise-i18n"
 gem "devise"
