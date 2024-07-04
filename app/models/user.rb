@@ -8,7 +8,7 @@ class User < ApplicationRecord
   enumerize :role, in: ROLES, predicates: true
 
   has_many :customer_accounts, dependent: :destroy
-  has_one_attached :contract
+  has_one :contract, class_name: "Users::Contract", dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

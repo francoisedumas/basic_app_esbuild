@@ -2,20 +2,21 @@
 
 class ContractsController < ApplicationController
   def show
-    generate_contract_pdf unless current_user.contract.attached?
+    @contract = Users::Contract.find_or_create_by(user: current_user)
+    generate_pdf unless @contract.document.attached?
     respond_to do |format|
       format.html
       format.pdf do
-        send_data current_user.contract.download, filename: "file.pdf"
+        send_data @contract.document.download, filename: "file.pdf"
       end
     end
   end
 
   private
 
-  def generate_contract_pdf
+  def generate_pdf
     pdf = ::PdfGenerator::Base.generate_now(template: "contracts/_contract", locals: {})
-    current_user.contract.attach(
+    @contract.document.attach(
       io: StringIO.new(pdf), filename: "contract", content_type: "application/pdf"
     )
   end
