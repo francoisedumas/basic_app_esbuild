@@ -2,7 +2,7 @@
 
 module PdfGenerator
   class Base
-    ADAPTER = Rails.application.credentials.pdf_adapter
+    ADAPTER = "grover"
 
     attr_reader :template, :locals
 
