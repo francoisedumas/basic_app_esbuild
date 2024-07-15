@@ -24,4 +24,7 @@ Rails.application.routes.draw do
   end
 
   root "profile#edit"
+  namespace :webhooks do
+    resource :dropbox_sign, controller: :dropbox_sign, only: [:create]
+  end
 end
