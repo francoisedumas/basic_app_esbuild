@@ -19,10 +19,9 @@ module DropboxSign
       dropbox_object.file_urls = @file_urls
       dropbox_object.signers = signers
 
-      result = @signature_request_api.signature_request_send(dropbox_object)
-      p result
+      @signature_request_api.signature_request_send(dropbox_object)
     rescue Dropbox::Sign::ApiError => e
-      puts "Exception when calling Dropbox Sign API: #{e}"
+      Rails.logger.error("Exception when calling Dropbox Sign API: : #{e.message}")
     end
 
     private
