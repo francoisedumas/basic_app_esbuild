@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
+    <style>
+      body {
+        margin: 0px;
+      }
+
+      .pdf-container {
+        background-color: white;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .pdf-header {
+        color: #c00;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        font-size: 2rem !important;
+        font-weight: bold;
+      }
+
+      .small-text {
+        font-size: 0.5rem;
+        font-weight: lighter;
+      }
+
+      .medium-text {
+        font-size: 0.75rem;
+        font-weight: normal;
+      }
+
+      .font-bold {
+        font-weight: bolder;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+
+      .text-right {
+        text-align: right;
+      }
+
+      .pdf-grid {
+        display: table;
+        width: 100%;
+      }
+
+      .pdf-column {
+        display: table-cell;
+        vertical-align: top;
+      }
+
+      .pdf-column p {
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+
+      .underline {
+        text-decoration-line: underline;
+      }
+    </style>
+  </head>
+  <body style="padding: 10px;">
+    <%= yield %>
+  </body>
+</html>

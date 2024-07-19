@@ -2,7 +2,7 @@
 
 module PdfGenerator
   class Base
-    ADAPTER = "grover"
+    ADAPTER = "stirling"
 
     attr_reader :template, :locals
 
