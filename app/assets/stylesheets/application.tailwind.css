@@ -75,3 +75,57 @@ h1 {
 .zigzag tbody tr:nth-child(even) {
   transform: rotate(-2deg);
 }
+
+.pdf-container {
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.pdf-header {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.small-text {
+  font-size: 0.5rem;
+  font-weight: lighter;
+}
+
+.medium-text {
+  font-size: 0.75rem;
+  font-weight: normal;
+}
+
+.font-bold {
+  font-weight: bolder;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.pdf-grid {
+  display: table;
+  width: 100%;
+}
+
+.pdf-column {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.pdf-column p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.underline {
+  text-decoration-line: underline;
+}

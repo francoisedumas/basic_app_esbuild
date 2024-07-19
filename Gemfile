@@ -32,6 +32,7 @@ gem "valvat"
 gem "view_component"
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
+gem "http"
 
 group :development do
   gem "web-console"
