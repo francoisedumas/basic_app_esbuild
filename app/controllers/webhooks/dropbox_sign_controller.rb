@@ -2,9 +2,13 @@
 
 module Webhooks
   class DropboxSignController < BaseController
+    EVENT_TYPE = {
+      "contract" => DropboxSign::Webhooks::SignatureUpdate
+    }.freeze
     def create
       record = InboundWebhook.create(body: payload)
-      if record.body.dig("event", "event_type") == "callback_test"
+      kind = record.body.dig("signature_request", "metadata", "kind")
+      if EVENT_TYPE[kind].new(record).call
         render(plain: "Hello API Event received", status: :ok)
       else
         render(plain: "Issue", status: :internal_server_error)

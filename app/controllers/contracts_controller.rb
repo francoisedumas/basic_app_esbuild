@@ -13,7 +13,7 @@ class ContractsController < ApplicationController
   end
 
   def create
-    DropboxSign::SignatureRequest.new(
+    response = DropboxSign::SignatureRequest.new(
       file_urls: [current_user.contract.document.blob.url],
       signers: [{name: "Francois DevTech", email: "francois.devtech@gmail.com"}],
       metadata: { kind: "contract" },
@@ -23,6 +23,8 @@ class ContractsController < ApplicationController
         message: "mon message"
       }
     ).call
+    signature = response.signature_request.signature_request_id
+    current_user.contract.update(dropbox_sign_signature_request_id: signature)
     redirect_to contract_path
   end
 
