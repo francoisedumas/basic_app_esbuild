@@ -25,6 +25,7 @@ class ContractsController < ApplicationController
     ).call
     signature = response.signature_request.signature_request_id
     current_user.contract.update(dropbox_sign_signature_request_id: signature)
+    flash[:notice] = "C'est envoyé!"
     redirect_to contract_path
   end
 

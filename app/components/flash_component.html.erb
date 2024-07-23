@@ -1,0 +1,14 @@
+<%= content_tag :div, class: "flex flex-col justify-center absolute right-0 top-0 m-5 animate-fade-out",
+                data: { controller: "remove",
+                        action: "animationend->remove#remove",
+                        turbo: "temporary" },
+                role: "alert" do %>
+  <%= content_tag :div, class: "flex items-center py-2 px-3 shadow-md mb-2 border-l-4 #{bg_classes}" do %>
+    <%= content_tag :div, class: "rounded-full bg-white mr-3 #{text_classes}" do %>
+      <%= render_svg %>
+    <% end %>
+    <div class="text-white max-w-xs">
+      <%= content %>
+    </div>
+  <% end %>
+<% end %>

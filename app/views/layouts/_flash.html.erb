@@ -1,0 +1,13 @@
+<div id="flash-alerts">
+  <% if notice %>
+    <%= render FlashComponent.new(variant: :success) do %>
+      <%= sanitize notice %>
+    <% end %>
+  <% end %>
+
+  <% if alert %>
+    <%= render FlashComponent.new(variant: :alert) do %>
+      <%= sanitize alert %>
+    <% end %>
+  <% end %>
+</div>
