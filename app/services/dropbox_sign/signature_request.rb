@@ -48,6 +48,11 @@ module DropboxSign
       dropbox_object.metadata = @metadata
       dropbox_object.test_mode = true
       dropbox_object.signing_options = build_signing_options
+      dropbox_object.use_text_tags = text_tag?
+    end
+
+    def text_tag?
+      @metadata[:kind] == "contract"
     end
 
     def build_signing_options
