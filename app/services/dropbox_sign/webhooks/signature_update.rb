@@ -18,6 +18,7 @@ module DropboxSign
         else
           state = request.is_declined ? "declined" : "signed"
           @contract.update(state:)
+          DropboxSign::Download.call(resource: @contract)
         end
       end
     end
