@@ -9,6 +9,7 @@ module DropboxSign
       @title = options[:title] || "Mon titre"
       @subject = options[:subject] || "Mon sujet"
       @message = options[:message] || "Mon message"
+      @embed = options[:embed] || false
       @signature_request_api = Dropbox::Sign::SignatureRequestApi.new
     end
 
@@ -19,7 +20,11 @@ module DropboxSign
       dropbox_object.file_urls = @file_urls
       dropbox_object.signers = signers
 
-      @signature_request_api.signature_request_send(dropbox_object)
+      if @embed
+        @signature_request_api.signature_request_create_embedded(dropbox_object)
+      else
+        @signature_request_api.signature_request_send(dropbox_object)
+      end
     rescue Dropbox::Sign::ApiError => e
       Rails.logger.error("Exception when calling Dropbox Sign API: : #{e.message}")
     end
@@ -49,6 +54,7 @@ module DropboxSign
       dropbox_object.test_mode = true
       dropbox_object.signing_options = build_signing_options
       dropbox_object.use_text_tags = text_tag?
+      dropbox_object.client_id = Rails.application.credentials.hellosign_client_key if @embed
     end
 
     def text_tag?

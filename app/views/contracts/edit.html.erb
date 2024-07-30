@@ -1,0 +1,10 @@
+<h1>Embed</h1>
+<div class="mx-auto max-w-4xl h-auto p-4">
+  <div data-controller="hellosign"
+      data-hellosign-client-id-value="<%= Rails.application.credentials.hellosign_client_key %>"
+      data-hellosign-claim-url-value="<%= @sign_url %>"
+      data-hellosign-redirect-path-value="<%= contract_path %>"
+      class="w-full aspect-w-3 aspect-h-4 mb-4"
+      id="sign-here">
+  </div>
+</div>
