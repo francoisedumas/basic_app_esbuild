@@ -3,4 +3,8 @@
   <%= link_to "Télécharger le contrat", contract_path(format: :pdf), class: "btn" %>
 </div>
 
-<%= render "contract" %>
+<% if (current_user.contract&.document&.attached? && current_user.contract&.document&.representable?) %>
+  <%= image_tag(current_user.contract.document.preview(resize_to_limit: [800, 600])) %>
+<% else %>
+  <%= render "contract" %>
+<% end %>
