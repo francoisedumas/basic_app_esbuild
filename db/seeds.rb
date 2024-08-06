@@ -15,4 +15,9 @@ user = User.new(
 )
 user.save
 
+user.avatar.attach(
+  io: File.open(Rails.root.join("app/assets/images/jean.avif")),
+  filename: "jean.avif"
+)
+
 p "User jean@bon.fr with password qwerty created 🚀"

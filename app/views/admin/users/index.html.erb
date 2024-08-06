@@ -6,4 +6,4 @@
   </div>
 <% end %>
 
-<%= render TableComponent.new(model: User, columns: [:full_name, :email, :role_text, :edit_link], collection: @users) %>
+<%= render "users", users: @users %>

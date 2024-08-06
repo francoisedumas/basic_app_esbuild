@@ -4,6 +4,7 @@ fr:
       user: Utilisateur
     attributes:
       user:
+        avatar: Avatar
         edit_link: ""
         email: Email
         first_name: Prénom
