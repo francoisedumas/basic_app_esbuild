@@ -1,0 +1,10 @@
+<div class="container">
+  <h1>Projects</h1>
+  <ol>
+    <% @projects.each do |project| %>
+      <li>
+        <strong><%= project.title %></strong> personne en charge <%= project.user.full_name %>
+      </li>
+    <% end %>
+  </ol>
+</div>

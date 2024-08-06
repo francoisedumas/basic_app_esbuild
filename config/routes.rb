@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
     resource :profile, only: [:edit], controller: :profile
     resource :document, only: [:show]
+    resources :projects, only: [:index]
     resource :report, only: [:show]
     resource :contract, only: [:show, :create, :edit]
     resources :users, only: [] do
