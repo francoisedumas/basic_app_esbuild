@@ -3,7 +3,7 @@
 module Admin
   class UsersController < ApplicationController
     def index
-      @users = User.order(:last_name, :first_name)
+      @users = User.includes(avatar_attachment: :blob).order(:last_name, :first_name)
     end
 
     def new

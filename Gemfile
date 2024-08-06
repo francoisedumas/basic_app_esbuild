@@ -40,6 +40,7 @@ group :development do
 end
 
 group :development, :test do
+  gem "bullet"
   gem "httplog"
   gem "pry-byebug"
   gem "pry-rails"
