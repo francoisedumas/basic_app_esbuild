@@ -1,4 +1,23 @@
 <div class="container">
   <h1>API Fetcher</h1>
 
+  <%= form_tag api_fetcher_path, method: :get do %>
+    <%= render FormComponent.new do |c| %>
+
+      <%= label_tag :url, "Enter URL:", class:"form-label" %>
+      <%= text_field_tag :url, params[:url], class:"form-input" %>
+
+      <% c.with_action do %>
+        <%= submit_tag "Fetch", class: "btn btn-primary" %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% if @response %>
+    <div class="mt-4">
+      <pre class="bg-white p-4 rounded overflow-auto whitespace-pre-wrap">
+        <%= @response %>
+      </pre>
+    </div>
+  <% end %>
 </div>
