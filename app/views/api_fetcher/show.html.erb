@@ -7,6 +7,12 @@
       <%= label_tag :url, "Enter URL:", class:"form-label" %>
       <%= text_field_tag :url, params[:url], class:"form-input" %>
 
+      <%= label_tag :x_user_email, "Enter Email:", class:"form-label" %>
+      <%= text_field_tag :x_user_email, params[:x_user_email], class:"form-input" %>
+
+      <%= label_tag :x_user_token, "Enter Token:", class:"form-label" %>
+      <%= text_field_tag :x_user_token, params[:x_user_token], type: "password", class:"form-input" %>
+
       <% c.with_action do %>
         <%= submit_tag "Fetch", class: "btn btn-primary" %>
       <% end %>
