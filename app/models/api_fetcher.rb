@@ -7,9 +7,13 @@ class ApiFetcher
     @x_user_token = x_user_token
   end
 
-  def fetch
+  def get
+    make_request Net::HTTP::Get
+  end
+
+  def make_request(klass)
     uri = URI(@url)
-    request = Net::HTTP::Get.new(uri)
+    request = klass.new(uri)
     request['X-User-Email'] = @x_user_email if @x_user_email.present?
     request['X-User-Token'] = @x_user_token if @x_user_token.present?
 

@@ -8,6 +8,6 @@ class ApiFetcherController < ApplicationController
       params[:url],
       params[:x_user_email],
       params[:x_user_token]
-    ).fetch
+    ).get
   end
 end
