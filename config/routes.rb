@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
   devise_for :users
   devise_scope :user do
     unauthenticated { root to: "devise/sessions#new", as: :unauthenticated_root }
@@ -10,7 +9,7 @@ Rails.application.routes.draw do
     resource :document, only: [:show]
     resources :projects, only: [:index]
     resource :report, only: [:show]
-    resources :restaurants, only: [:show, :index]
+    resources :restaurants, only: [:show, :index, :new, :create]
     resource :api_fetcher, only: [:show], controller: :api_fetcher
     resource :contract, only: [:show, :create, :edit]
     resources :users, only: [] do

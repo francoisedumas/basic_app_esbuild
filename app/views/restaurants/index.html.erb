@@ -1,4 +1,9 @@
 <div>
+  <% content_for :actions do %>
+    <div class="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
+      <%= link_to t(".new"), new_restaurant_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
   <h1 class="font-bold text-4xl">Restaurants#index</h1>
   <div class="mt-8 flex flex-col">
     <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">

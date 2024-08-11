@@ -16,6 +16,35 @@ class RestaurantsController < ApplicationController
     ).get
   end
 
+  def new
+  end
+
+  def create
+    fetcher = ApiFetcher.new(
+      base_url,
+      email,
+      token
+    )
+
+    @restaurant = fetcher.post(
+      {
+        "restaurant":
+          {
+            "name": params[:name],
+            "address": params[:address],
+            "category": params[:category]
+          }
+      }
+    )
+
+    if @restaurant["errors"].nil?
+      redirect_to restaurant_path(@restaurant["id"])
+    else
+      @errors = @restaurant["errors"]
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def base_url

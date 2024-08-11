@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>New restaurant</h1>
+
+  <% if @errors.present? %>
+    <div class="mt-4">
+      <%= @errors %>
+    </div>
+  <% end %>
+
+  <%= form_tag restaurants_path, method: :post do %>
+    <%= render FormComponent.new do |c| %>
+
+      <%= label_tag :name, "Enter name:", class:"form-label" %>
+      <%= text_field_tag :name, params[:name], class:"form-input" %>
+
+      <%= label_tag :address, "Enter address:", class:"form-label" %>
+      <%= text_field_tag :address, params[:address], class:"form-input" %>
+
+      <%= label_tag :category, "Enter category:", class:"form-label" %>
+      <%= text_field_tag :category, params[:category], class:"form-input" %>
+
+      <% c.with_action do %>
+        <%= submit_tag "Fetch", class: "btn btn-primary" %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+</div>

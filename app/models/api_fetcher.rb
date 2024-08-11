@@ -11,11 +11,20 @@ class ApiFetcher
     make_request Net::HTTP::Get
   end
 
-  def make_request(klass)
+  def post(body)
+    make_request Net::HTTP::Post, body:
+  end
+
+  def make_request(klass, body: {})
     uri = URI(@url)
     request = klass.new(uri)
     request['X-User-Email'] = @x_user_email if @x_user_email.present?
     request['X-User-Token'] = @x_user_token if @x_user_token.present?
+
+    if body.present?
+      request['Content-Type'] = 'application/json'
+      request.body = body.to_json
+    end
 
     http = Net::HTTP.new(uri.hostname, uri.port)
     http.use_ssl = true if uri.scheme == 'https'
