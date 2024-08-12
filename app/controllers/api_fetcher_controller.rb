@@ -4,10 +4,8 @@ class ApiFetcherController < ApplicationController
   def show
     return if params[:url].blank?
 
-    @response = ApiFetcher.new(
-      params[:url],
-      params[:x_user_email],
-      params[:x_user_token]
+    @response = ApiClients::Base.new(
+      params[:url]
     ).get
   end
 end

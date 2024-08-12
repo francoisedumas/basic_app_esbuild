@@ -1,32 +1,22 @@
+# frozen_string_literal: true
+
 class RestaurantsController < ApplicationController
   def index
-    @restaurants = ApiFetcher.new(
-      base_url,
-      email,
-      token
-    ).get
+    @restaurants = client(base_url).get
   end
 
   def show
     @url = base_url + "/#{params[:id]}"
-    @restaurant = ApiFetcher.new(
-      @url,
-      email,
-      token
-    ).get
+    @restaurant = client(@url).get
   end
 
   def new
   end
 
   def create
-    fetcher = ApiFetcher.new(
-      base_url,
-      email,
-      token
-    )
+    client = client(base_url)
 
-    @restaurant = fetcher.post(
+    @restaurant = client.post(
       {
         "restaurant":
           {
@@ -45,7 +35,27 @@ class RestaurantsController < ApplicationController
     end
   end
 
+  def destroy
+    @url = base_url + "/#{params[:id]}"
+    @restaurant = client(@url).delete
+
+    if @restaurant["errors"].nil?
+      flash[:notice] = @restaurant["message"]
+    else
+      flash[:notice] = @restaurant["errors"]
+    end
+    redirect_to restaurants_path
+  end
+
   private
+
+  def client(url)
+    ApiClients::RestaurantsClient.new(
+      url,
+      email,
+      token
+    )
+  end
 
   def base_url
     "https://the-fork.api.lewagon.com/api/v1/restaurants"

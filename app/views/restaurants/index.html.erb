@@ -23,6 +23,9 @@
               <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 first:sm:pl-6" scope="col">
                CATEGORY
               </th>
+              <th class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 first:sm:pl-6" scope="col">
+               ACTION
+              </th>
             </tr>
           </thead>
           <tbody class="bg-white">
@@ -39,6 +42,9 @@
                 </td>
                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm first:font-medium text-gray-900 first:sm:pl-6">
                    <%= restaurant["category"] %>
+                </td>
+                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm first:font-medium text-gray-900 first:sm:pl-6">
+                  <%= button_to "Remove", restaurant_path(restaurant["id"]), method: :delete %>
                 </td>
               </tr>
             <% end %>

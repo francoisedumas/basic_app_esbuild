@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+############################################################
+# Deprecated just kept for the first videos about Net:HTTP #
+## See ApiClients::Base and ApiClients::RestaurantsClient ##
+############################################################
+
 class ApiFetcher
   def initialize(url, x_user_email, x_user_token)
     @url = url
@@ -11,8 +16,20 @@ class ApiFetcher
     make_request Net::HTTP::Get
   end
 
+  def delete
+    make_request Net::HTTP::Delete
+  end
+
   def post(body)
     make_request Net::HTTP::Post, body:
+  end
+
+  def patch(body)
+    make_request Net::HTTP::Patch, body:
+  end
+
+  def put(body)
+    make_request Net::HTTP::Put, body:
   end
 
   def make_request(klass, body: {})
