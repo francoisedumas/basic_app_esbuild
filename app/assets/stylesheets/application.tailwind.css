@@ -22,6 +22,11 @@
   .form-label {
     @apply block text-sm font-medium text-gray-700 mb-1;
   }
+
+  .title {
+    color: theme('colors.indigo.600');
+    background-color: theme('colors.indigo.50');
+  }
 }
 
 body {

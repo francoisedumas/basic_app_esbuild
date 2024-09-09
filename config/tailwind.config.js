@@ -14,7 +14,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: colors.indigo,
+        primary: {...colors.indigo, DEFAULT: colors.indigo[600]},
       },
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
