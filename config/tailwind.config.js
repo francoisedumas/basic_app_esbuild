@@ -27,7 +27,10 @@ module.exports = {
       },
       animation: {
         'fade-out': 'fade-out 3s linear 1'
-      }
+      },
+      listStyleImage: {
+        checkmark: 'url("/assets/images/carrot.png")',
+      },
     },
   },
   plugins: [
