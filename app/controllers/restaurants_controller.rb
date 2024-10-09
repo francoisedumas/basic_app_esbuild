@@ -18,11 +18,11 @@ class RestaurantsController < ApplicationController
 
     @restaurant = client.post(
       {
-        "restaurant":
+        restaurant:
           {
-            "name": params[:name],
-            "address": params[:address],
-            "category": params[:category]
+            name: params[:name],
+            address: params[:address],
+            category: params[:category]
           }
       }
     )
@@ -39,11 +39,11 @@ class RestaurantsController < ApplicationController
     @url = base_url + "/#{params[:id]}"
     @restaurant = client(@url).delete
 
-    if @restaurant["errors"].nil?
-      flash[:notice] = @restaurant["message"]
-    else
-      flash[:notice] = @restaurant["errors"]
-    end
+    flash[:notice] = if @restaurant["errors"].nil?
+                       @restaurant["message"]
+                     else
+                       @restaurant["errors"]
+                     end
     redirect_to restaurants_path
   end
 

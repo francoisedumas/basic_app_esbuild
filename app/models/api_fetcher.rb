@@ -32,19 +32,19 @@ class ApiFetcher
     make_request Net::HTTP::Put, body:
   end
 
-  def make_request(klass, body: {})
+  def make_request(klass, body: {}) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
     uri = URI(@url)
     request = klass.new(uri)
-    request['X-User-Email'] = @x_user_email if @x_user_email.present?
-    request['X-User-Token'] = @x_user_token if @x_user_token.present?
+    request["X-User-Email"] = @x_user_email if @x_user_email.present?
+    request["X-User-Token"] = @x_user_token if @x_user_token.present?
 
     if body.present?
-      request['Content-Type'] = 'application/json'
+      request["Content-Type"] = "application/json"
       request.body = body.to_json
     end
 
     http = Net::HTTP.new(uri.hostname, uri.port)
-    http.use_ssl = true if uri.scheme == 'https'
+    http.use_ssl = true if uri.scheme == "https"
 
     response = http.request(request)
 

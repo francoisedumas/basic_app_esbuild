@@ -12,10 +12,22 @@ class ContractsController < ApplicationController
     end
   end
 
+  def edit
+    @contract = Users::Contract.find_or_create_by(user: current_user)
+
+    if (signature_id = signer_signature_id)
+      result = Dropbox::Sign::EmbeddedApi.new.embedded_sign_url(signature_id)
+      @sign_url = result.embedded.sign_url
+    else
+      flash[:alert] = "Une erreur est survenue avec la signature éléctronique"
+      redirect_to contract_path
+    end
+  end
+
   def create
     response = DropboxSign::SignatureRequest.new(
       file_urls: [current_user.contract.document.blob.url],
-      signers: [{name: "Francois DevTech", email: "francois.devtech@gmail.com"}],
+      signers: [{ name: "Francois DevTech", email: "francois.devtech@gmail.com" }],
       metadata: { kind: "contract" },
       options: {
         title: "mon titre",
@@ -28,18 +40,6 @@ class ContractsController < ApplicationController
     current_user.contract.update(dropbox_sign_signature_request_id: signature)
     flash[:notice] = "C'est envoyé!"
     redirect_to edit_contract_path
-  end
-
-  def edit
-    @contract = Users::Contract.find_or_create_by(user: current_user)
-
-    if (signature_id = signer_signature_id)
-      result = Dropbox::Sign::EmbeddedApi.new.embedded_sign_url(signature_id)
-      @sign_url = result.embedded.sign_url
-    else
-      flash[:alert] = 'Une erreur est survenue avec la signature éléctronique'
-      redirect_to contract_path
-    end
   end
 
   private

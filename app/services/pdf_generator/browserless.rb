@@ -28,9 +28,9 @@ module PdfGenerator
 
     def css_asset
       if Rails.env.development?
-        File.read(Rails.root.join('app/assets/builds/tailwind.css'))
+        Rails.root.join("app/assets/builds/tailwind.css").read
       else
-        ActionController::Base.helpers.asset_path('tailwind.css')
+        ActionController::Base.helpers.asset_path("tailwind.css")
       end
     end
 

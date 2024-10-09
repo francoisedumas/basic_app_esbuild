@@ -13,7 +13,7 @@ module DropboxSign
       @signature_request_api = Dropbox::Sign::SignatureRequestApi.new
     end
 
-    def call
+    def call # rubocop:disable Metrics/MethodLength
       dropbox_object = Dropbox::Sign::SignatureRequestSendRequest.new
 
       build_options(dropbox_object)
