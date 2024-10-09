@@ -3,59 +3,54 @@ name: Ruby on Rails CI
 on: [push]
 
 jobs:
-  rubocop:
-    name: Rubocop
-    runs-on: ubuntu-latest
-    steps:
-      # Downloads a copy of the code in your repository before running CI tests
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      # Performs a clean installation of Ruby and gems
-      # For more information, see https://github.com/ruby/setup-ruby
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1.2' # Specify Ruby version to avoid Your Ruby version is 3.x.x, but your Gemfile specified 3.x.x
-          # bundler: '2.4.20' # Specify Bundler version to avoid Bundler 2.x.xx is running, but your lockfile was generated with 2.x.xx
-          bundler-cache: true # not using bundler cache true to avoid Unable to find gem rubocop-discourse; is the gem installed? Gem::MissingSpecError
-
-      # # Ensure all gems are installed
-      # - name: Bundle Install
-      #   run: bundle install
-      - name: Rubocop
-        run: bundle exec rubocop --parallel
-
-  # rspec:
-  #   name: Rspec
+  # rubocop:
+  #   name: Rubocop
   #   runs-on: ubuntu-latest
-  #   # For more information, see https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers
-  #   services:
-  #     postgres:
-  #       # Docker Hub image
-  #       image: postgres
-  #       ports:
-  #         # Maps tcp port 5432 on service container to the host
-  #         - "5432:5432"
-  #       # Set health checks to wait until postgres has started
-  #       options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-  #       env:
-  #         POSTGRES_DB: rails_test
-  #         POSTGRES_USER: rails
-  #         POSTGRES_PASSWORD: password
-  #   env:
-  #     RAILS_ENV: test
-  #     DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
   #   steps:
-  #     - name: Checkout code
+  #     # Downloads a copy of the code in your repository before running CI tests
+  #     - name: Check out repository code
   #       uses: actions/checkout@v4
+  #     # Performs a clean installation of Ruby and gems
+  #     # For more information, see https://github.com/ruby/setup-ruby
   #     - name: Install Ruby and gems
   #       uses: ruby/setup-ruby@v1
   #       with:
-  #         ruby-version: '3.1.2'
-  #         bundler: '2.4.20'
-  #     - name: Bundle Install
-  #       run: bundle install
-  #     - name: Set up database schema
-  #       run: bin/rails db:setup
-  #     - name: Run tests
-  #       run: bundle exec rspec
+  #         ruby-version: '3.1.2' # Specify Ruby version to avoid Your Ruby version is 3.x.x, but your Gemfile specified 3.x.x
+  #         bundler-cache: true # not using bundler cache true to avoid Unable to find gem rubocop-discourse; is the gem installed? Gem::MissingSpecError
+
+  #     # Run rubocop (--parallel is to optimize the run in Github)
+  #     - name: Rubocop
+  #       run: bundle exec rubocop --parallel
+
+  rspec:
+    name: Rspec
+    runs-on: ubuntu-latest
+    # For more information, see https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers
+    services:
+      postgres:
+        # Docker Hub image
+        image: postgres
+        ports:
+          # Maps tcp port 5432 on service container to the host
+          - "5432:5432"
+        # Set health checks to wait until postgres has started
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.2'
+          bundler-cache: true
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+      - name: Run tests
+        run: bundle exec rspec
