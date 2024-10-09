@@ -29,18 +29,18 @@ module ApiClients
 
     private
 
-    def make_request(klass, body: {})
+    def make_request(klass, body: {}) # rubocop:disable Metrics/AbcSize,Metrics/MethodLength
       uri = URI(@url)
       request = klass.new(uri)
       default_headers(request)
 
       if body.present?
-        request['Content-Type'] = 'application/json'
+        request["Content-Type"] = "application/json"
         request.body = body.to_json
       end
 
       http = Net::HTTP.new(uri.hostname, uri.port)
-      http.use_ssl = true if uri.scheme == 'https'
+      http.use_ssl = true if uri.scheme == "https"
 
       response = http.request(request)
 
@@ -50,9 +50,9 @@ module ApiClients
     end
 
     def default_headers(request)
-      return unless @token.present?
+      return if @token.blank?
 
-      request['Authorization'] = "Bearer #{@token}"
+      request["Authorization"] = "Bearer #{@token}"
     end
   end
 end

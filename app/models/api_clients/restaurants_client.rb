@@ -2,7 +2,7 @@
 
 module ApiClients
   class RestaurantsClient < Base
-    def initialize(url, x_user_email, x_user_token)
+    def initialize(url, x_user_email, x_user_token) # rubocop:disable Lint/MissingSuper
       @url = url
       @x_user_email = x_user_email
       @x_user_token = x_user_token
@@ -11,8 +11,8 @@ module ApiClients
     private
 
     def default_headers(request)
-      request['X-User-Email'] = @x_user_email if @x_user_email.present?
-      request['X-User-Token'] = @x_user_token if @x_user_token.present?
+      request["X-User-Email"] = @x_user_email if @x_user_email.present?
+      request["X-User-Token"] = @x_user_token if @x_user_token.present?
     end
   end
 end

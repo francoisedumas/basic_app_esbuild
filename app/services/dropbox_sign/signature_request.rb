@@ -17,7 +17,6 @@ module DropboxSign
       dropbox_object = Dropbox::Sign::SignatureRequestSendRequest.new
 
       build_options(dropbox_object)
-      dropbox_object.file_urls = @file_urls
       dropbox_object.signers = signers
 
       if @embed
@@ -48,6 +47,7 @@ module DropboxSign
 
     def build_options(dropbox_object)
       dropbox_object.title = @title
+      dropbox_object.file_urls = @file_urls
       dropbox_object.subject = @subject
       dropbox_object.message = @message
       dropbox_object.metadata = @metadata

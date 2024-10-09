@@ -8,7 +8,7 @@ AllCops:
   - "db/**/*"
   - "tmp/**/*"
   - "vendor/**/*"
-  - "config/environments/*"
+  - "config/**/*.rb"
 
 Bundler/OrderedGems:
   Enabled: false
@@ -34,7 +34,9 @@ Metrics/ModuleLength:
 
 Rails/BulkChangeTable:
   Enabled: false
-
+Rails/I18nLocaleTexts:
+  Enabled: false
+  
 Style/Documentation:
   Enabled: false
 Style/EmptyMethod:

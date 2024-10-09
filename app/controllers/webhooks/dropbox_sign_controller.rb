@@ -65,9 +65,9 @@ module Webhooks
       callback_data = JSON.parse(request.params[:json], symbolize_names: true)
       callback_event = Dropbox::Sign::EventCallbackRequest.init(callback_data)
 
-      unless Dropbox::Sign::EventCallbackHelper.is_valid(api_key, callback_event)
-        render plain: "Not found", status: :not_found
-      end
+      return if Dropbox::Sign::EventCallbackHelper.is_valid(api_key, callback_event)
+
+      render plain: "Not found", status: :not_found
     end
 
     def api_key
