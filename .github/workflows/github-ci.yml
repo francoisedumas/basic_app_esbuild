@@ -49,7 +49,9 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1.2'
-          bundler-cache: true
+          bundler: '2.4.20'
+      - name: Bundle Install
+        run: bundle install
       - name: Set up database schema
         run: bin/rails db:setup
       - name: Run tests
