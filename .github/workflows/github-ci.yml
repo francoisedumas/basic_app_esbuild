@@ -3,17 +3,49 @@ name: Ruby CI
 on: [push]
 
 jobs:
-  rubocop:
-    name: Rubocop
+  # rubocop:
+  #   name: Rubocop
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v4
+  #     - name: Install Ruby and gems
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: '3.1.2' # Not needed with a `.ruby-version` or `.tool-versions`
+  #         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+  #     - name: Rubocop
+  #       run: bundle exec rubocop --parallel
+
+  rpsec:
+    name: Rspec
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+
     steps:
-      - name: Check out repository code
+      - name: Checkout code
         uses: actions/checkout@v4
-      - name: Install Ruby and gems
+
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2' # Not needed with a `.ruby-version` or `.tool-versions`
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-      - name: Rubocop
-        run: bundle exec rubocop --parallel
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432
+        run: bin/rails db:setup
+      - name: Run tests
+        run: bundle exec rspec
