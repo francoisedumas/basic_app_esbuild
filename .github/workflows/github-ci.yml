@@ -3,52 +3,17 @@ name: Ruby CI
 on: [push]
 
 jobs:
-  # rubocop:
-  #   name: Rubocop
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - name: Check out repository code
-  #       uses: actions/checkout@v4
-  #     - name: Install Ruby and gems
-  #       uses: ruby/setup-ruby@v1
-  #       with:
-  #         ruby-version: '3.1.2' # Not needed with a `.ruby-version` or `.tool-versions`
-  #         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-  #     - name: Rubocop
-  #       run: bundle exec rubocop --parallel
-
-  rspec:
-    name: Rspec
+  rubocop:
+    name: Rubocop
     runs-on: ubuntu-latest
-    # For more information, see https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers
-    services:
-      postgres:
-        # Docker Hub image
-        image: postgres
-        ports:
-          # Maps tcp port 5432 on service container to the host
-          - "5432:5432"
-        # Set health checks to wait until postgres has started
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-        env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+
     steps:
-      - name: Checkout code
+      - name: Check out repository code
         uses: actions/checkout@v4
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2'
-          bundler: '2.4.20'
-      - name: Bundle Install
-        run: bundle install
-      - name: Set up database schema
-        run: bin/rails db:setup
-      - name: Run tests
-        run: bundle exec rspec
+          ruby-version: '3.1.2' # Not needed with a `.ruby-version` or `.tool-versions`
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Rubocop
+        run: bundle exec rubocop --parallel
