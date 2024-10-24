@@ -37,6 +37,7 @@ gem "http"
 
 group :development do
   gem "web-console"
+  gem "brakeman", require: false
 end
 
 group :development, :test do
