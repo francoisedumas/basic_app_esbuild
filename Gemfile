@@ -17,9 +17,9 @@ gem "grover"
 gem "image_processing", "~> 1.12"
 gem "jsbundling-rails", "~> 1.3"
 gem "pg", "~> 1.1"
-gem "puma", "~> 5.0"
+gem "puma", "~> 6.4.3"
 gem "rails-i18n", "~> 7.0.9"
-gem "rails", "~> 7.1.1"
+gem "rails", "~> 7.1.4.1"
 gem "redis", "~> 4.0"
 gem "sass-rails"
 gem "sidekiq-failures", "~> 1.0"
@@ -34,6 +34,10 @@ gem "view_component"
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
 gem "http"
+
+# Add gem to ensure the proper version
+gem "webrick", "~> 1.8.2"
+gem "rexml", "~> 3.3.6"
 
 group :development do
   gem "web-console"
