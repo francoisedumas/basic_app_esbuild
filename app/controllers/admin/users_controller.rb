@@ -42,7 +42,9 @@ module Admin
     end
 
     def user_params
-      params.require(:user).permit(:email, :last_name, :first_name, :role)
+      permitted_attributes = [:email, :last_name, :first_name]
+      permitted_attributes << :role if current_user.admin?
+      params.require(:user).permit(permitted_attributes)
     end
 
     def active_menu_link

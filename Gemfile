@@ -46,4 +46,5 @@ group :development, :test do
   gem "pry-rails"
   gem "rspec-rails"
   gem "rubocop-rails", require: false
+  gem "brakeman", require: false
 end
