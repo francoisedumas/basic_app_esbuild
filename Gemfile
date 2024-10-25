@@ -47,4 +47,5 @@ group :development, :test do
   gem "rspec-rails"
   gem "rubocop-rails", require: false
   gem "brakeman", require: false
+  gem "bundle-audit", require: false
 end
