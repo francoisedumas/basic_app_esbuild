@@ -52,4 +52,5 @@ group :development, :test do
   # Those are dependancies of other gems. But we need to update them for security issues
   # Delete them only if the dependancies updated
   gem "rexml", "~> 3.3.6"
+  gem "webrick", ">= 1.8.2"
 end
