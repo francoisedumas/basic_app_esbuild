@@ -53,27 +53,29 @@ jobs:
           ruby-version: '3.1.2'
           bundler: '2.4.20'
           cache: true
+      - name: Bundle Install
+        run: bundle install
 
       - name: Run Bundle Audit
         run: bundle exec bundle-audit check --update
 
-  # brakeman:
-  #   name: Brakeman
-  #   runs-on: ubuntu-latest
-  #   needs: setup
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
+  brakeman:
+    name: Brakeman
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  #     - name: Install Ruby and Bundler
-  #       uses: ruby/setup-ruby@v1
-  #       with:
-  #         ruby-version: '3.1.2'
-  #         bundler: '2.4.20'
-  #         cache: true
+      - name: Install Ruby and Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.2'
+          bundler: '2.4.20'
+          cache: true
 
-  #     - name: Run Brakeman
-  #       run: bundle exec brakeman
+      - name: Run Brakeman
+        run: bundle exec brakeman
 
   # rspec:
   #   name: Rspec
