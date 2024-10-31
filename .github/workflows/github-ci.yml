@@ -32,20 +32,6 @@ jobs:
       - name: Bundle Install
         run: bundle install --path vendor/bundle
 
-      - name: Prepare Database
-        run: |
-          bin/rails db:create db:schema:load
-        services:
-          postgres:
-            image: postgres
-            ports:
-              - "5432:5432"
-            options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-            env:
-              POSTGRES_DB: rails_test
-              POSTGRES_USER: rails
-              POSTGRES_PASSWORD: password
-
   rubocop:
     name: Rubocop
     runs-on: ubuntu-latest
@@ -98,6 +84,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
+      - name: Set up database schema
+        run: bin/rails db:setup
       - name: Run Rspec Tests
         run: bundle exec rspec
