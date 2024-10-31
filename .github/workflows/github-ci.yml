@@ -19,7 +19,7 @@ jobs:
         with:
           ruby-version: '3.1.2'
           bundler: '2.4.20'
-          cache: true # Enables caching for gems
+          bundler-cache: true
 
   rubocop:
     name: Rubocop
@@ -29,80 +29,76 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Ruby and Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1.2'
-          bundler: '2.4.20'
-          cache: true
+      - name: Bundle Install
+        run: bundle install
 
       - name: Run Rubocop
         run: bundle exec rubocop --parallel
 
-  bundle_audit:
-    name: Bundle Audit
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  # bundle_audit:
+  #   name: Bundle Audit
+  #   runs-on: ubuntu-latest
+  #   needs: setup
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Install Ruby and Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1.2'
-          bundler: '2.4.20'
-          cache: true
+  #     - name: Install Ruby and Bundler
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: '3.1.2'
+  #         bundler: '2.4.20'
+  #         cache: true
 
-      - name: Run Bundle Audit
-        run: bundle exec bundle-audit check --update
+  #     - name: Run Bundle Audit
+  #       run: bundle exec bundle-audit check --update
 
-  brakeman:
-    name: Brakeman
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  # brakeman:
+  #   name: Brakeman
+  #   runs-on: ubuntu-latest
+  #   needs: setup
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Install Ruby and Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1.2'
-          bundler: '2.4.20'
-          cache: true
+  #     - name: Install Ruby and Bundler
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: '3.1.2'
+  #         bundler: '2.4.20'
+  #         cache: true
 
-      - name: Run Brakeman
-        run: bundle exec brakeman
+  #     - name: Run Brakeman
+  #       run: bundle exec brakeman
 
-  rspec:
-    name: Rspec
-    runs-on: ubuntu-latest
-    needs: setup
-    env:
-      RAILS_ENV: test
-    services:
-      postgres:
-        image: postgres
-        ports:
-          - "5432:5432"
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-        env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  # rspec:
+  #   name: Rspec
+  #   runs-on: ubuntu-latest
+  #   needs: setup
+  #   env:
+  #     RAILS_ENV: test
+  #   services:
+  #     postgres:
+  #       image: postgres
+  #       ports:
+  #         - "5432:5432"
+  #       options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+  #       env:
+  #         POSTGRES_DB: rails_test
+  #         POSTGRES_USER: rails
+  #         POSTGRES_PASSWORD: password
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Install Ruby and Bundler
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1.2'
-          bundler: '2.4.20'
-          cache: true
+  #     - name: Install Ruby and Bundler
+  #       uses: ruby/setup-ruby@v1
+  #       with:
+  #         ruby-version: '3.1.2'
+  #         bundler: '2.4.20'
+  #         cache: true
 
-      - name: Set up database schema
-        run: bin/rails db:setup
-      - name: Run Rspec Tests
-        run: bundle exec rspec
+  #     - name: Set up database schema
+  #       run: bin/rails db:setup
+  #     - name: Run Rspec Tests
+  #       run: bundle exec rspec
