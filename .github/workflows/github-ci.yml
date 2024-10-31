@@ -14,14 +14,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # - name: Cache Gems
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: vendor/bundle
-      #     key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-gems-
-
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
@@ -29,16 +21,11 @@ jobs:
           bundler: '2.4.20'
           bundler-cache: true
 
-      - name: Bundle Install
-        run: bundle install --path vendor/bundle
-
   rubocop:
     name: Rubocop
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       - name: Run Rubocop
         run: bundle exec rubocop --parallel
@@ -48,8 +35,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       - name: Run Bundle Audit
         run: bundle exec bundle-audit check --update
@@ -59,8 +44,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
       - name: Run Brakeman
         run: bundle exec brakeman
@@ -82,8 +65,6 @@ jobs:
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
       - name: Set up database schema
         run: bin/rails db:setup
       - name: Run Rspec Tests
