@@ -6,20 +6,6 @@ jobs:
   setup:
     name: Setup and Install Dependencies
     runs-on: ubuntu-latest
-    env:
-      RAILS_ENV: test
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
-    services:
-      postgres:
-        image: postgres
-        ports:
-          - "5432:5432"
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-        env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -89,6 +75,20 @@ jobs:
   rspec:
     name: Rspec
     runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - "5432:5432"
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
     needs: setup
     steps:
       - name: Checkout code
