@@ -3,44 +3,105 @@ name: Ruby CI
 on: [push]
 
 jobs:
-  rspec_rubocop:
-    name: RspecRubocop
+  setup:
+    name: Setup and Install Dependencies
     runs-on: ubuntu-latest
-    # For more information, see https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers
-    services:
-      postgres:
-        # Docker Hub image
-        image: postgres
-        ports:
-          # Maps tcp port 5432 on service container to the host
-          - "5432:5432"
-        # Set health checks to wait until postgres has started
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-        env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
-    env:
-      RAILS_ENV: test
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1.2'
           bundler: '2.4.20'
-      - name: Bundle Install
-        run: bundle install
-      - name: Rubocop
+          bundler-cache: true
+          cache-version: 1
+
+  rubocop:
+    name: Rubocop
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.2'
+          bundler: '2.4.20'
+          bundler-cache: true
+
+      - name: Run Rubocop
         run: bundle exec rubocop --parallel
+
+  bundle_audit:
+    name: Bundle Audit
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.2'
+          bundler: '2.4.20'
+          bundler-cache: true
+
       - name: Run Bundle Audit
         run: bundle exec bundle-audit check --update
+
+  brakeman:
+    name: Brakeman
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.2'
+          bundler: '2.4.20'
+          bundler-cache: true
+
       - name: Run Brakeman
         run: bundle exec brakeman
+
+  rspec:
+    name: Rspec
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - "5432:5432"
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    needs: setup
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1.2'
+          bundler: '2.4.20'
+          bundler-cache: true
+
       - name: Set up database schema
         run: bin/rails db:setup
-      - name: Run tests
+      - name: Run Rspec Tests
         run: bundle exec rspec
