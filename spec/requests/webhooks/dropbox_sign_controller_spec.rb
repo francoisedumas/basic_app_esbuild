@@ -5,7 +5,9 @@ RSpec.describe Webhooks::DropboxSignController, type: :request do
     let(:api_key) { "mocked-api-key" }
     let(:event_type) { "signature_request_all_signed" }
     let(:event_time) { Time.now.to_i.to_s }
-    let(:mock_event_hash) { OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha256"), api_key, "#{event_time}#{event_type}") }
+    let(:mock_event_hash) do
+      OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha256"), api_key, "#{event_time}#{event_type}")
+    end
     let(:payload) do
       {
         event: {
@@ -25,7 +27,10 @@ RSpec.describe Webhooks::DropboxSignController, type: :request do
     end
 
     context "when the IP is allowed and HMAC is correct" do
-      before { allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).and_return(Webhooks::DropboxSignController::ALLOWED_IPS.sample) }
+      before do
+        allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).
+          and_return(Webhooks::DropboxSignController::ALLOWED_IPS.sample)
+      end
 
       it "creates a new event" do
         expect { subject }.to change(InboundWebhook, :count).by(1)
@@ -38,7 +43,10 @@ RSpec.describe Webhooks::DropboxSignController, type: :request do
     end
 
     context "when the IP is not allowed" do
-      before { allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).and_return("192.168.1.1") }
+      before do
+        allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).
+          and_return("192.168.1.1")
+      end
 
       it "returns a not found response" do
         subject
@@ -47,9 +55,14 @@ RSpec.describe Webhooks::DropboxSignController, type: :request do
     end
 
     context "when the HMAC is incorrect" do
-      let(:mock_event_hash) { OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha256"), api_key, event_type) } # invalid HMAC
-
-      before { allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).and_return(Webhooks::DropboxSignController::ALLOWED_IPS.sample) }
+      # invalid HMAC
+      let(:mock_event_hash) do
+        OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new("sha256"), api_key, event_type)
+      end
+      before do
+        allow_any_instance_of(ActionDispatch::Request).to receive(:remote_ip).
+          and_return(Webhooks::DropboxSignController::ALLOWED_IPS.sample)
+      end
 
       it "returns a not found response" do
         subject
