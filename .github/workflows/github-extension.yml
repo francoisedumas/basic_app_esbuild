@@ -1,0 +1,9 @@
+name: Github Actions Extension
+
+on: [push]
+
+jobs:
+  testing-extension:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Une extension tres cool"
