@@ -9,6 +9,10 @@ module DropboxSign
         @contract = Users::Contract.find_by(dropbox_sign_signature_request_id: @signature_request_id)
       end
 
+      def self.call(*args)
+        new(*args).call
+      end
+
       def call
         result = Dropbox::Sign::SignatureRequestApi.new.signature_request_get(@signature_request_id)
         request = result.signature_request

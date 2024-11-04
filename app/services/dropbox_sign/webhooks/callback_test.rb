@@ -7,7 +7,13 @@ module DropboxSign
         @inbound_webhook = inbound_webhook
       end
 
+      def self.call(*args)
+        new(*args).call
+      end
+
       def call
+        Rails.logger.info("In the callback test service")
+
         true
       end
     end

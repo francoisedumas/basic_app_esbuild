@@ -18,22 +18,19 @@ module Webhooks
     ].freeze
 
     EVENT_TYPE = {
-      "contract" => DropboxSign::Webhooks::SignatureUpdate,
+      "signature_request_all_signed" => DropboxSign::Webhooks::SignatureUpdate,
       "callback_test" => DropboxSign::Webhooks::CallbackTest
     }.freeze
 
     def create
       record = InboundWebhook.create(body: payload)
-      kind = record.body.dig("signature_request", "metadata", "kind") || record.body.dig("event", "event_type")
-      if kind.nil?
-        # Dropbox Sign Webhooks API ask explicitly for a payload with the string 'Hello API Event Received'
-        # Source : https://developers.hellosign.com/docs/events/walkthrough/#responding-to-events
-        render(plain: "Hello API Event Received", status: :ok)
-      elsif EVENT_TYPE[kind].new(record).call
-        render(plain: "Hello API Event received", status: :ok)
-      else
-        render(plain: "Issue", status: :internal_server_error)
-      end
+      kind = record.body.dig("event", "event_type")
+
+      EVENT_TYPE[kind].call(record) unless kind.nil?
+
+      render plain: "Hello API Event Received", status: :ok
+      # Dropbox Sign Webhooks API ask explicitly for a payload with the string 'Hello API Event Received'
+      # Source : https://developers.hellosign.com/docs/events/walkthrough/#responding-to-events
     end
 
     private
@@ -43,10 +40,7 @@ module Webhooks
         parsed_params = JSON.parse(params.require(:json))
         ActionController::Parameters.new(parsed_params).
           permit(
-            signature_request: [
-              :signature_request_id,
-              { metadata: [:kind] }
-            ],
+            signature_request: [:signature_request_id],
             event: [:event_type]
           )
       end
