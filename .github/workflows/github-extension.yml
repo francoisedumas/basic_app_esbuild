@@ -7,3 +7,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Une extension tres cool"
+      - run: echo "Mon mot de passe est ${{ secrets.MOTDEPASSE }}"
