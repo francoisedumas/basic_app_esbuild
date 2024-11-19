@@ -34,7 +34,7 @@ gem "view_component"
 gem "wicked_pdf"
 gem "wkhtmltopdf-binary"
 gem "http"
-
+gem "lograge"
 # Add gem to ensure the proper version
 gem "webrick", "~> 1.8.2"
 gem "rexml", "~> 3.3.6"
