@@ -3,12 +3,13 @@
 class MenuLinkComponent < ViewComponent::Base
   attr_reader :title, :icon, :path, :policy
 
-  def initialize(title:, icon:, path:, policy: true)
+  def initialize(title:, icon:, path:, policy: true, target: nil)
     super
     @title = title
     @icon = icon
     @path = path
     @policy = policy
+    @target = target
   end
 
   def render?
