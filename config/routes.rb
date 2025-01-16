@@ -2,6 +2,11 @@
 
 Rails.application.routes.draw do
   devise_for :users
+
+  direct :documentation do
+    'https://rubyonrails.org/'
+  end
+
   devise_scope :user do
     unauthenticated { root to: "devise/sessions#new", as: :unauthenticated_root }
 
@@ -10,7 +15,7 @@ Rails.application.routes.draw do
     resources :projects, only: [:index]
     resource :report, only: [:show]
     resource :content, only: [:show]
-    resources :restaurants, only: [:show, :index, :new, :create, :destroy]
+    resources :restaurants, only: [:show, :index, :new, :create, :destroy], path: "bistrots", path_names: { new: "nouveau", edit: "modifier" }
     resource :api_fetcher, only: [:show], controller: :api_fetcher
     resource :contract, only: [:show, :create, :edit]
     resources :users, only: [] do
