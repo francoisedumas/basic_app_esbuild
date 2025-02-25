@@ -5,6 +5,7 @@
     path: admin_users_path) %>
 
   <%= render MenuLinkComponent.new(title: "Projects", icon: "fa-folder-open", path: projects_path) %>
+  <%= render MenuLinkComponent.new(title: "Heavy task", icon: "fa-folder-open", path: heavy_tasks_path) %>
   <%= render MenuLinkComponent.new(title: "API Fetcher", icon: "fa-folder-open", path: api_fetcher_path) %>
   <%= render MenuLinkComponent.new(title: "Bistrots", icon: "fa-folder-open", path: restaurants_path) %>
   <%= render MenuLinkComponent.new(title: "Customer account", icon: "fa-calendar", path: user_customer_accounts_path(current_user)) %>

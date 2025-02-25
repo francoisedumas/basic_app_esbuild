@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     unauthenticated { root to: "devise/sessions#new", as: :unauthenticated_root }
 
+    resources :heavy_tasks, only: [:create, :index]
     resource :profile, only: [:edit], controller: :profile
     resource :document, only: [:show]
     resources :projects, only: [:index]
