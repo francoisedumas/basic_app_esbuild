@@ -1,4 +1,12 @@
 <div>
   <h1 class="font-bold text-4xl">MyComponents#index</h1>
-
+  <%= render DefinitionItemComponent.new(term: "Un terme", description: "Une description") %>
+  <%= render DefinitionItemComponent.new(term: "Un terme", description: "Une description") do |item| %>
+    <% item.with_link do %>
+      <%= link_to "Go somewhere", "#", class: "text-blue-500 hover:underline"%>
+    <% end %>
+  <% end %>
+  <%= render DefinitionItemComponent.new(term: "Un terme") do %>
+    <p>Un contenu additionnel</p>
+  <% end %>
 </div>
