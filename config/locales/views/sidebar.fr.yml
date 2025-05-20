@@ -2,3 +2,4 @@ fr:
   sidebar:
     content:
       view_profile: Voir mon profil
+      welcome_html: "Bienvenue <strong>%{name}</strong>"

@@ -9,7 +9,7 @@
     <div class="flex items-center">
       <%= image_tag "profile.webp", class: "inline-block h-9 w-9 rounded-full", alt: "profile" %>
       <div class="ml-3">
-        <p class="text-sm font-medium text-white"><%= current_user.full_name %></p>
+        <p class="text-sm font-medium text-white"><%= t(".welcome_html", name: current_user.full_name) %></p>
         <p class="text-xs font-medium text-indigo-200 group-hover:text-white"><%= t(".view_profile") %></p>
       </div>
     </div>
