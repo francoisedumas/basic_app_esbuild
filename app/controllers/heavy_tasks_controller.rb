@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class HeavyTasksController < ApplicationController
   def index
   end

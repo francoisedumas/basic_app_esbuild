@@ -19,8 +19,7 @@ class DefinitionListComponent < ViewComponent::Base
         [content_tag(:dt, term, class: "font-semibold text-gray-800 bg-blue-100 p-2 mb-0 mt-2"),
          content_tag(:dd,
                       safe_join([final_description, link_presence].compact),
-                      class: "flex justify-between bg-blue-100 p-2 mt-0 mb-2"
-         )]
+                      class: "flex justify-between bg-blue-100 p-2 mt-0 mb-2")]
       )
     end
 
