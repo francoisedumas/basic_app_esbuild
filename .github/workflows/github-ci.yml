@@ -13,8 +13,8 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2'
-          bundler: '2.4.20'
+          ruby-version: "3.1.2"
+          bundler: "2.7.2"
           bundler-cache: true
           cache-version: 1
 
@@ -29,8 +29,8 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2'
-          bundler: '2.4.20'
+          ruby-version: "3.1.2"
+          bundler: "2.7.2"
           bundler-cache: true
 
       - name: Run Rubocop
@@ -47,8 +47,8 @@ jobs:
       - name: Install Ruby and Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2'
-          bundler: '2.4.20'
+          ruby-version: "3.1.2"
+          bundler: "2.7.2"
           bundler-cache: true
 
       - name: Run Bundle Audit
@@ -65,8 +65,8 @@ jobs:
       - name: Install Ruby and Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2'
-          bundler: '2.4.20'
+          ruby-version: "3.1.2"
+          bundler: "2.7.2"
           bundler-cache: true
 
       - name: Run Brakeman
@@ -97,8 +97,8 @@ jobs:
       - name: Install Ruby and Bundler
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1.2'
-          bundler: '2.4.20'
+          ruby-version: "3.1.2"
+          bundler: "2.7.2"
           bundler-cache: true
 
       - name: Set up database schema
