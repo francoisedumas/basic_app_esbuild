@@ -32,12 +32,10 @@ module DropboxSign
         filename: "file_signed",
         content_type: "application/pdf"
       )
-      true
     end
 
     def log_error(message)
       Rails.logger.error(message)
-      false
     end
   end
 end
