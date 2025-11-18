@@ -36,3 +36,6 @@ pdf_adapter: wicked_pdf
 ```
 dev
 ```
+
+### Bump Dependabot
+Done on Tuesday 18 pushed all without much checks! just to avoid receiving emails from this demo repo
