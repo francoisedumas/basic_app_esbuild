@@ -1,0 +1,6 @@
+<%= turbo_stream_from ["heavy_task_channel", current_user] %>
+<%# this will look like heavy_task_channel:hash the hash is the global id of the user %>
+
+<div id="heavy_task">
+  <%= button_to "Heavy task", heavy_tasks_path, class: "btn btn-primary" %>
+</div>

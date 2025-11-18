@@ -1,16 +1,26 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  if Rails.env.development?
+    mount Lookbook::Engine, at: "/lookbook"
+  end
   devise_for :users
+
+  direct :documentation do
+    'https://rubyonrails.org/'
+  end
+
   devise_scope :user do
     unauthenticated { root to: "devise/sessions#new", as: :unauthenticated_root }
 
+    get 'my_components', to: 'my_components#index'
+    resources :heavy_tasks, only: [:create, :index]
     resource :profile, only: [:edit], controller: :profile
     resource :document, only: [:show]
     resources :projects, only: [:index]
     resource :report, only: [:show]
     resource :content, only: [:show]
-    resources :restaurants, only: [:show, :index, :new, :create, :destroy]
+    resources :restaurants, only: [:show, :index, :new, :create, :destroy], path: "bistrots", path_names: { new: "nouveau", edit: "modifier" }
     resource :api_fetcher, only: [:show], controller: :api_fetcher
     resource :contract, only: [:show, :create, :edit]
     resources :users, only: [] do

@@ -52,4 +52,6 @@ group :development, :test do
   gem "rubocop-rails", require: false
   gem "brakeman", require: false
   gem "bundle-audit", require: false
+  gem "lookbook", ">= 2.3.8"
+  gem "listen"
 end
