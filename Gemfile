@@ -37,7 +37,7 @@ gem "http"
 gem "lograge"
 # Add gem to ensure the proper version
 gem "webrick", "~> 1.8.2"
-gem "rexml", "~> 3.3.6"
+gem "rexml", "~> 3.4.2"
 
 group :development do
   gem "web-console"

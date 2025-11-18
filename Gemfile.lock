@@ -325,7 +325,7 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.3.9)
+    rexml (3.4.2)
     rouge (4.5.1)
     rspec-core (3.13.0)
       rspec-support (~> 3.13.0)
@@ -466,7 +466,7 @@ DEPENDENCIES
   rails (~> 7.1.4.1)
   rails-i18n (~> 7.0.9)
   redis (~> 4.0)
-  rexml (~> 3.3.6)
+  rexml (~> 3.4.2)
   rspec-rails
   rubocop-rails
   sass-rails
